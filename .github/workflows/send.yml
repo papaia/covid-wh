@@ -15,6 +15,6 @@ jobs:
         with:
           node-version: '12.x'
       - run: npm start
-      - env:
-        WH_ID: ${{ secrets.WH_ID }}
-        WH_TOKEN: ${{ secrets.WH_TOKEN }}
+        env:
+          WH_ID: ${{ secrets.WH_ID }}
+          WH_TOKEN: ${{ secrets.WH_TOKEN }}

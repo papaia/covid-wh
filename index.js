@@ -19,15 +19,6 @@ const formatDate = (d) => `${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${pad(d.
     .setTimestamp(date.getTime())
     .setFooter(`UNIX: ${date.getTime()}`)
     .addField(
-      'גלובאלי',
-      [
-        `**סכ"ה מקרים:** ${globalInfo.cases.toLocaleString()}`,
-        `**סכ"ה החלימו:** ${globalInfo.recovered.toLocaleString()}`,
-        `**סכ"ה מתים:** ${globalInfo.deaths.toLocaleString()}`,
-      ],
-      true
-    )
-    .addField(
       'ישראל',
       [
         `**סכ"ה מקרים:** ${localInfoIL.cases.toLocaleString()}`,
@@ -35,6 +26,15 @@ const formatDate = (d) => `${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${pad(d.
         `**סכ"ה מתים:** ${localInfoIL.deaths.toLocaleString()}`,
         `**סכ"ה בדיקות:** ${localInfoIL.totalTests.toLocaleString()}`,
         `**חולים חדשים (היום):** ${localInfoIL.todayCases.toLocaleString()}`,
+      ],
+      true
+    )
+    .addField(
+      'גלובאלי',
+      [
+        `**סכ"ה מקרים:** ${globalInfo.cases.toLocaleString()}`,
+        `**סכ"ה החלימו:** ${globalInfo.recovered.toLocaleString()}`,
+        `**סכ"ה מתים:** ${globalInfo.deaths.toLocaleString()}`,
       ],
       true
     );

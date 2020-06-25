@@ -4,6 +4,7 @@ const BASE = 'https://coronavirus-19-api.herokuapp.com';
 
 const pad = (n, c = 2) => String(n).padStart(c, '0');
 const formatDate = (d) => `${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${pad(d.getFullYear())}`;
+const log = (...lines) => console.log(lines.flat().join('\n'));
 
 (async () => {
   const wh = new WebhookClient(process.env.WH_ID, process.env.WH_TOKEN);
@@ -11,6 +12,12 @@ const formatDate = (d) => `${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${pad(d.
   const [globalInfo, localInfoIL] = await Promise.all([
     fetch(`${BASE}/all`).then((res) => res.json()),
     fetch(`${BASE}/countries/israel`).then((res) => res.json()),
+  ]);
+
+  log([
+    'Fetched data!',
+    `Global: ${JSON.stringify(globalInfo, null, 2)}`,
+    `Local (IL): ${JSON.stringify(localInfoIL, null, 2)}`,
   ]);
 
   const date = new Date();
@@ -40,5 +47,6 @@ const formatDate = (d) => `${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${pad(d.
     );
 
   await wh.send(embed);
+  log(`Sent: ${JSON.stringify(embed.toJSON())}`);
   process.exit(0);
 })();

@@ -8,13 +8,13 @@ const formatDate = (d) =>
 const log = (...lines) => console.log(lines.flat().join('\n'));
 const toJSON = (thing) => JSON.stringify(thing, null, 2);
 
-const formatData = (data) =>
+const formatData = (data, tests = true) =>
   [
     `**סה"כ מקרים:** ${data.cases.toLocaleString()}`,
     `**סה"כ החלימו:** ${data.recovered.toLocaleString()}`,
     `**סה"כ מתים:** ${data.deaths.toLocaleString()}`,
-    `**סה"כ בדיקות:** ${data.totalTests.toLocaleString()}`,
     `**חולים חדשים (היום):** ${data.todayCases.toLocaleString()}`,
+    tests ? `**סה"כ בדיקות:** ${data.totalTests.toLocaleString()}` : '',
   ].join('\n');
 
 (async () => {
@@ -37,7 +37,7 @@ const formatData = (data) =>
     .setTimestamp(date.getTime())
     .setFooter(`UNIX: ${date.getTime()}`)
     .addField('ישראל', formatData(localInfoIL), true)
-    .addField('גלובאלי', formatData(globalInfo), true);
+    .addField('גלובאלי', formatData(globalInfo, false), true);
 
   await wh.send(embed);
   log(`Sent: ${toJSON(embed.toJSON())}`);

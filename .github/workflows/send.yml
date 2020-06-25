@@ -1,0 +1,20 @@
+name: Send
+on:
+  schedule:
+    - cron: '0 12 * * *'
+
+jobs:
+  run:
+    name: 'Run script'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - run: npm start
+      - env:
+        WH_ID: ${{ secrets.WH_ID }}
+        WH_TOKEN: ${{ secrets.WH_TOKEN }}

@@ -3,8 +3,11 @@ const { MessageEmbed, WebhookClient } = require('discord.js');
 const BASE = 'https://coronavirus-19-api.herokuapp.com';
 
 const pad = (n, c = 2) => String(n).padStart(c, '0');
-const formatDate = (d) => `${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${pad(d.getFullYear())}`;
+const formatDate = (d) =>
+  `${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${pad(d.getFullYear())}`;
 const log = (...lines) => console.log(lines.flat().join('\n'));
+const toJSON = (thing) => JSON.stringify(thing, null, 2);
+
 const formatData = (data) =>
   [
     `**סה"כ מקרים:** ${data.cases.toLocaleString()}`,
@@ -13,6 +16,7 @@ const formatData = (data) =>
     `**סה"כ בדיקות:** ${data.totalTests.toLocaleString()}`,
     `**חולים חדשים (היום):** ${data.todayCases.toLocaleString()}`,
   ].join('\n');
+
 (async () => {
   const wh = new WebhookClient(process.env.WH_ID, process.env.WH_TOKEN);
 
@@ -23,8 +27,8 @@ const formatData = (data) =>
 
   log([
     'Fetched data!',
-    `Global: ${JSON.stringify(globalInfo, null, 2)}`,
-    `Local (IL): ${JSON.stringify(localInfoIL, null, 2)}`,
+    `Global: ${toJSON(globalInfo)}`,
+    `Local (IL): ${toJSON(localInfoIL)}`,
   ]);
 
   const date = new Date();
@@ -36,6 +40,6 @@ const formatData = (data) =>
     .addField('גלובאלי', formatData(globalInfo), true);
 
   await wh.send(embed);
-  log(`Sent: ${JSON.stringify(embed.toJSON())}`);
+  log(`Sent: ${toJSON(embed.toJSON())}`);
   process.exit(0);
 })();

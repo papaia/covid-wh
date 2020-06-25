@@ -7,10 +7,10 @@ const formatDate = (d) => `${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${pad(d.
 const log = (...lines) => console.log(lines.flat().join('\n'));
 const formatData = (data) =>
   [
-    `**סכ"ה מקרים:** ${data.cases.toLocaleString()}`,
-    `**סכ"ה החלימו:** ${data.recovered.toLocaleString()}`,
-    `**סכ"ה מתים:** ${data.deaths.toLocaleString()}`,
-    `**סכ"ה בדיקות:** ${data.totalTests.toLocaleString()}`,
+    `**סה"כ מקרים:** ${data.cases.toLocaleString()}`,
+    `**סה"כ החלימו:** ${data.recovered.toLocaleString()}`,
+    `**סה"כ מתים:** ${data.deaths.toLocaleString()}`,
+    `**סה"כ בדיקות:** ${data.totalTests.toLocaleString()}`,
     `**חולים חדשים (היום):** ${data.todayCases.toLocaleString()}`,
   ].join('\n');
 (async () => {

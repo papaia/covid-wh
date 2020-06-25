@@ -2,7 +2,7 @@ name: Send Test
 on:
   push:
   schedule:
-    - cron: '*/5 * * * *'
+    - cron: '*/15 * * * *'
 
 jobs:
   run:
@@ -15,7 +15,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '12.x'
-      - run: npm install -P
+      - run: npm install --no-package-lock --only=production
       - run: npm start
         env:
           WH_ID: ${{ secrets.WH_ID_TEST }}

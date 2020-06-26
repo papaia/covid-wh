@@ -1,6 +1,7 @@
 name: Send
 on:
   schedule:
+    # 9 UTC is 12 UTC+3
     - cron: '0 9 * * *'
 
 jobs:

@@ -15,8 +15,10 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '12.x'
-      - run: npm install --no-package-lock --only=production
-      - run: npm start
+      - name: Install dependencies
+        run: npm install --no-package-lock --only=production
+      - name: 'Run script'
+        run: npm start
         env:
           WH_ID: ${{ secrets.WH_ID_TEST }}
           WH_TOKEN: ${{ secrets.WH_TOKEN_TEST }}

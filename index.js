@@ -47,7 +47,7 @@ const formatData = (data, tests = true) =>
       { name: 'גלובאלי', value: formatData(globalInfo, false), inline: true },
     ],
   };
-  log(`Sending: ${prepare(embed.toJSON())}`);
+  log(`Sending: ${prepare(embed)}`);
 
   await fetch(WH_URL, {
     method: 'POST',

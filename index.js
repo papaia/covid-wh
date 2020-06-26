@@ -50,7 +50,7 @@ const formatData = (data, tests = true) =>
 
   await fetch(WH_URL, {
     method: 'POST',
-    body: JSON.stringify({ embeds: [embed] }),
+    body: JSON.stringify({ username: 'עדכוני קורונה', embeds: [embed] }),
     headers: { 'Content-Type': 'application/json' },
   });
 

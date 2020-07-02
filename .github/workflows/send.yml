@@ -1,8 +1,8 @@
 name: Send
 on:
   schedule:
-    # 9 UTC is 12 UTC+3
-    - cron: '0 9 * * *'
+    # 16 UTC is 19 UTC+3
+    - cron: '0 16 * * *'
 
 jobs:
   run:

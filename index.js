@@ -8,7 +8,6 @@ const WH_URL = `https://discordapp.com/api/webhooks/${process.env.WH_ID}/${proce
 const pad = (n, c = 2) => String(n).padStart(c, '0');
 const formatDate = (d) =>
   `${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${pad(d.getFullYear())}`;
-const prepare = (thing) => inspect(thing, { depth: Infinity });
 
 const formatData = (data, tests = true) =>
   [
@@ -29,8 +28,8 @@ const formatData = (data, tests = true) =>
     fetch(`${BASE}/countries/israel`).then((res) => res.json()),
   ]);
 
-  console.log('Global', prepare(globalInfo));
-  console.log('Local (IL)', prepare(localInfoIL));
+  console.log('Global', globalInfo);
+  console.log('Local (IL)', localInfoIL);
 
   const date = new Date();
   const embed = {

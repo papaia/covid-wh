@@ -1,12 +1,13 @@
 {
+  "scripts": {
+    "start": "node index.js"
+  },
+  "prettier": "@papaia/prettier",
   "dependencies": {
     "node-fetch": "^2.6.0"
   },
   "devDependencies": {
     "@papaia/prettier": "^2.0.1",
     "dotenv": "^8.2.0"
-  },
-  "scripts": {
-    "start": "node index.js"
   }
 }

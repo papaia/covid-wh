@@ -1,15 +1,13 @@
 if (!process.env.WH_ID) require('dotenv').config();
 const fetch = require('node-fetch');
-const { inspect } = require('util');
 
 const BASE = 'https://coronavirus-19-api.herokuapp.com';
 const WH_URL = `https://discordapp.com/api/webhooks/${process.env.WH_ID}/${process.env.WH_TOKEN}?wait=true`;
 
-const pad = (n, c = 2) => String(n).padStart(c, '0');
-const formatDate = (d) =>
-  `${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${pad(d.getFullYear())}`;
+const pad = (n) => String(n).padStart(2, '0');
+const formatDate = (d) => `${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${pad(d.getFullYear())}`;
 
-const formatData = (data, tests = true) =>
+const formatData = (data, includeTests = true) =>
   [
     `**סה"כ מקרים:** ${data.cases.toLocaleString()}`,
     '',
@@ -19,7 +17,7 @@ const formatData = (data, tests = true) =>
     '',
     `**חולים חדשים (היום):** ${data.todayCases.toLocaleString()}`,
     `**מתים חדשים (היום):** ${data.todayDeaths.toLocaleString()}`,
-    tests ? `**סה"כ בדיקות:** ${data.totalTests.toLocaleString()}` : '',
+    includeTests ? `**סה"כ בדיקות:** ${data.totalTests.toLocaleString()}` : '',
   ].join('\n');
 
 (async () => {
@@ -31,13 +29,13 @@ const formatData = (data, tests = true) =>
   console.log('Global', globalInfo);
   console.log('Local (IL)', localInfoIL);
 
-  const date = new Date();
+  const now = new Date();
   const embed = {
-    title: `עדכון - ${formatDate(date)}`,
+    title: `עדכון - ${formatDate(now)}`,
     type: 'rich',
-    timestamp: date.toISOString(),
+    timestamp: now.toISOString(),
     color: 0x3eaf7c,
-    footer: { text: `UNIX: ${date.getTime()}` },
+    footer: { text: `UNIX: ${now.getTime()}` },
     fields: [
       { name: 'ישראל', value: formatData(localInfoIL), inline: true },
       { name: 'גלובאלי', value: formatData(globalInfo, false), inline: true },
@@ -49,6 +47,8 @@ const formatData = (data, tests = true) =>
     body: JSON.stringify({ username: 'עדכוני קורונה', embeds: [embed] }),
     headers: { 'Content-Type': 'application/json' },
   });
+
+  console.log('Sent!');
 
   process.exit(0);
 })();

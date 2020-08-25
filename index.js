@@ -1,13 +1,13 @@
 if (!process.env.WH_ID) require('dotenv').config();
 const fetch = require('node-fetch');
 const { inspect } = require('util');
+
 const BASE = 'https://coronavirus-19-api.herokuapp.com';
 const WH_URL = `https://discordapp.com/api/webhooks/${process.env.WH_ID}/${process.env.WH_TOKEN}?wait=true`;
 
 const pad = (n, c = 2) => String(n).padStart(c, '0');
 const formatDate = (d) =>
   `${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${pad(d.getFullYear())}`;
-const log = (...lines) => console.log(lines.flat().join('\n'));
 const prepare = (thing) => inspect(thing, { depth: Infinity });
 
 const formatData = (data, tests = true) =>
@@ -29,11 +29,8 @@ const formatData = (data, tests = true) =>
     fetch(`${BASE}/countries/israel`).then((res) => res.json()),
   ]);
 
-  log([
-    'Fetched data!',
-    `Global: ${prepare(globalInfo)}`,
-    `Local (IL): ${prepare(localInfoIL)}`,
-  ]);
+  console.log('Global', prepare(globalInfo));
+  console.log('Local (IL)', prepare(localInfoIL));
 
   const date = new Date();
   const embed = {

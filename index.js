@@ -41,7 +41,7 @@ const formatData = (data, source, includeTests = true) =>
     fields: [
       {
         name: 'ישראל',
-        value: formatData(localInfoIL, `${BASE_SOURCE_URL}/country/israel/`),
+        value: formatData(localInfoIL, `${BASE_SOURCE_URL}/country/israel`),
         inline: true,
       },
       {

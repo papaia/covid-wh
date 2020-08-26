@@ -7,7 +7,7 @@ const WH_URL = `https://discordapp.com/api/webhooks/${process.env.WH_ID}/${proce
 const pad = (n) => String(n).padStart(2, '0');
 const formatDate = (d) => `${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${d.getFullYear()}`;
 
-const formatData = (data, includeTests = true) =>
+const formatData = (data, source, includeTests = true) =>
   [
     `**סה"כ מקרים:** ${data.cases.toLocaleString()}`,
     '',
@@ -18,6 +18,7 @@ const formatData = (data, includeTests = true) =>
     `**חולים חדשים (היום):** ${data.todayCases.toLocaleString()}`,
     `**מתים חדשים (היום):** ${data.todayDeaths.toLocaleString()}`,
     includeTests ? `**סה"כ בדיקות:** ${data.totalTests.toLocaleString()}` : '',
+    `**[לעוד מידע](${source})**`,
   ].join('\n');
 
 (async () => {
@@ -37,8 +38,16 @@ const formatData = (data, includeTests = true) =>
     color: 0x3eaf7c,
     footer: { text: `UNIX: ${now.getTime()}` },
     fields: [
-      { name: 'ישראל', value: formatData(localInfoIL), inline: true },
-      { name: 'גלובאלי', value: formatData(globalInfo, false), inline: true },
+      {
+        name: 'ישראל',
+        value: formatData(localInfoIL, 'https://www.worldometers.info/coronavirus/country/israel/'),
+        inline: true,
+      },
+      {
+        name: 'גלובאלי',
+        value: formatData(globalInfo, 'https://www.worldometers.info/coronavirus/', false),
+        inline: true,
+      },
     ],
   };
 

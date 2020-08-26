@@ -5,7 +5,7 @@ const BASE = 'https://coronavirus-19-api.herokuapp.com';
 const WH_URL = `https://discordapp.com/api/webhooks/${process.env.WH_ID}/${process.env.WH_TOKEN}?wait=true`;
 
 const pad = (n) => String(n).padStart(2, '0');
-const formatDate = (d) => `${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${pad(d.getFullYear())}`;
+const formatDate = (d) => `${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${d.getFullYear()}`;
 
 const formatData = (data, includeTests = true) =>
   [

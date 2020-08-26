@@ -1,7 +1,8 @@
 if (!process.env.WH_ID) require('dotenv').config();
 const fetch = require('node-fetch');
 
-const BASE = 'https://coronavirus-19-api.herokuapp.com';
+const BASE_API_URL = 'https://coronavirus-19-api.herokuapp.com';
+const BASE_SOURCE_URL = 'https://www.worldometers.info/coronavirus/';
 const WH_URL = `https://discordapp.com/api/webhooks/${process.env.WH_ID}/${process.env.WH_TOKEN}?wait=true`;
 
 const pad = (n) => String(n).padStart(2, '0');
@@ -23,8 +24,8 @@ const formatData = (data, source, includeTests = true) =>
 
 (async () => {
   const [globalInfo, localInfoIL] = await Promise.all([
-    fetch(`${BASE}/countries/world`).then((res) => res.json()),
-    fetch(`${BASE}/countries/israel`).then((res) => res.json()),
+    fetch(`${BASE_API_URL}/countries/world`).then((res) => res.json()),
+    fetch(`${BASE_API_URL}/countries/israel`).then((res) => res.json()),
   ]);
 
   console.log('Global', globalInfo);
@@ -40,12 +41,12 @@ const formatData = (data, source, includeTests = true) =>
     fields: [
       {
         name: 'ישראל',
-        value: formatData(localInfoIL, 'https://www.worldometers.info/coronavirus/country/israel/'),
+        value: formatData(localInfoIL, `${BASE_SOURCE_URL}/country/israel/`),
         inline: true,
       },
       {
         name: 'גלובאלי',
-        value: formatData(globalInfo, 'https://www.worldometers.info/coronavirus/', false),
+        value: formatData(globalInfo, BASE_SOURCE_URL, false),
         inline: true,
       },
     ],

@@ -10,16 +10,16 @@ const formatDate = (d) => `${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${d.getF
 
 const formatData = (data, source, includeTests = true) =>
   [
-    `**סה"כ מקרים:** ${data.cases.toLocaleString()}`,
+    `**Total cases:** ${data.cases.toLocaleString()}`,
     '',
-    `**חולים (כרגע):** ${data.active.toLocaleString()}`,
-    `**סה"כ החלימו:** ${data.recovered.toLocaleString()}`,
-    `**סה"כ מתים:** ${data.deaths.toLocaleString()}`,
+    `**Currently sick:** ${data.active.toLocaleString()}`,
+    `**Total recovered:** ${data.recovered.toLocaleString()}`,
+    `**Total deaths:** ${data.deaths.toLocaleString()}`,
     '',
-    `**חולים חדשים (היום):** ${data.todayCases.toLocaleString()}`,
-    `**מתים חדשים (היום):** ${data.todayDeaths.toLocaleString()}`,
-    includeTests ? `**סה"כ בדיקות:** ${data.totalTests.toLocaleString()}` : '',
-    `**[לעוד מידע](${source})**`,
+    `**New cases (today):** ${data.todayCases.toLocaleString()}`,
+    `**New deaths (today):** ${data.todayDeaths.toLocaleString()}`,
+    includeTests ? `**Total tests:** ${data.totalTests.toLocaleString()}` : '',
+    `**[Click for more info](${source})**`,
   ].join('\n');
 
 (async () => {
@@ -33,19 +33,19 @@ const formatData = (data, source, includeTests = true) =>
 
   const now = new Date();
   const embed = {
-    title: `עדכון - ${formatDate(now)}`,
+    title: `Update - ${formatDate(now)}`,
     type: 'rich',
     timestamp: now.toISOString(),
-    color: 0x3eaf7c,
+    color: 0x00141b,
     footer: { text: `UNIX: ${now.getTime()}` },
     fields: [
       {
-        name: 'ישראל',
+        name: 'Israel',
         value: formatData(localInfoIL, `${BASE_SOURCE_URL}/country/israel`),
         inline: true,
       },
       {
-        name: 'גלובאלי',
+        name: 'Global',
         value: formatData(globalInfo, BASE_SOURCE_URL, false),
         inline: true,
       },
@@ -54,7 +54,11 @@ const formatData = (data, source, includeTests = true) =>
 
   await fetch(WH_URL, {
     method: 'POST',
-    body: JSON.stringify({ username: 'עדכוני קורונה', embeds: [embed] }),
+    body: JSON.stringify({
+      username: 'COVID Updates',
+      avatar_url: 'https://preview.pixlr.com/images/450nwm/1460/2/1460108316.jpg',
+      embeds: [embed],
+    }),
     headers: { 'Content-Type': 'application/json' },
   });
 

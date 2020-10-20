@@ -1,5 +1,6 @@
-if (!process.env.WH_ID) require('dotenv').config();
-const fetch = require('node-fetch');
+import dotenv from 'dotenv';
+if (!process.env.WH_ID) dotenv.config();
+import fetch from 'node-fetch';
 
 const BASE_API_URL = 'https://coronavirus-19-api.herokuapp.com';
 const BASE_SOURCE_URL = 'https://www.worldometers.info/coronavirus';

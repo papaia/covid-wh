@@ -3,7 +3,7 @@ const fetch = require('node-fetch');
 
 const BASE_API_URL = 'https://coronavirus-19-api.herokuapp.com';
 const BASE_SOURCE_URL = 'https://www.worldometers.info/coronavirus';
-const WH_URL = `https://discordapp.com/api/webhooks/${process.env.WH_ID}/${process.env.WH_TOKEN}?wait=true`;
+const WH_URL = `https://discordapp.com/api/v8/webhooks/${process.env.WH_ID}/${process.env.WH_TOKEN}?wait=true`;
 
 const pad = (n) => String(n).padStart(2, '0');
 const formatDate = (d) => `${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${d.getFullYear()}`;

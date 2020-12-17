@@ -11,22 +11,21 @@ const sourceUrl = (path = '') => `https://www.worldometers.info/coronavirus/${pa
 const pad = (n) => String(n).padStart(2, '0');
 const formatDate = (d) => `${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${d.getFullYear()}`;
 
-const formatData = (data, source) =>
-  stripIndent`
-    **Total Cases:** ${data.cases.toLocaleString()}
-      
-    **Active Cases:** ${data.active.toLocaleString()}
-    - Today: ${data.todayCases.toLocaleString()}
-    - Critical: ${data.critical.toLocaleString()}
-    **Deaths:** ${data.deaths.toLocaleString()}
-    - Today: ${data.todayDeaths.toLocaleString()}
-    **Recovered:** ${data.recovered.toLocaleString()}
-    - Today: ${data.todayRecovered.toLocaleString()}
+const formatData = (data, source) => stripIndent`
+  **Total Cases:** ${data.cases.toLocaleString()}
 
-    **Tests:** ${data.tests.toLocaleString()}
+  **Active Cases:** ${data.active.toLocaleString()}
+  - Today: ${data.todayCases.toLocaleString()}
+  - Critical: ${data.critical.toLocaleString()}
+  **Deaths:** ${data.deaths.toLocaleString()}
+  - Today: ${data.todayDeaths.toLocaleString()}
+  **Recovered:** ${data.recovered.toLocaleString()}
+  - Today: ${data.todayRecovered.toLocaleString()}
 
-    **[Click for more info](${source})**
-  `;
+  **Tests:** ${data.tests.toLocaleString()}
+
+  **[Click for more info](${source})**
+`;
 
 (async () => {
   const [globalInfo, localInfoIL] = await Promise.all([

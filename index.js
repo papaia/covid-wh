@@ -13,6 +13,7 @@ const formatDate = (d) => `${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${d.getF
 
 const formatData = (data, source) => stripIndent`
   **Total Cases:** ${data.cases.toLocaleString()}
+  **Total Tests:** ${data.tests.toLocaleString()}
 
   **Active Cases:** ${data.active.toLocaleString()}
   - Today: ${data.todayCases.toLocaleString()}
@@ -21,8 +22,6 @@ const formatData = (data, source) => stripIndent`
   - Today: ${data.todayDeaths.toLocaleString()}
   **Recovered:** ${data.recovered.toLocaleString()}
   - Today: ${data.todayRecovered.toLocaleString()}
-
-  **Tests:** ${data.tests.toLocaleString()}
 
   **[Click for more info](${source})**
 `;

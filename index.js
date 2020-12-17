@@ -1,52 +1,58 @@
 if (!process.env.WH_ID) require('dotenv').config();
 const fetch = require('node-fetch');
+const { stripIndent } = require('common-tags');
 
-const BASE_API_URL = 'https://coronavirus-19-api.herokuapp.com';
-const BASE_SOURCE_URL = 'https://www.worldometers.info/coronavirus';
 const WH_URL = `https://discordapp.com/api/v8/webhooks/${process.env.WH_ID}/${process.env.WH_TOKEN}?wait=true`;
+
+const url = (path) =>
+  `https://disease.sh/v3/covid-19/${path}?yesterday=false&twoDaysAgo=false&strict=true&allowNull=true`;
+const sourceUrl = (path = '') => `https://www.worldometers.info/coronavirus/${path}`;
 
 const pad = (n) => String(n).padStart(2, '0');
 const formatDate = (d) => `${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${d.getFullYear()}`;
 
-const formatData = (data, source, includeTests = true) =>
-  [
-    `**Total cases:** ${data.cases.toLocaleString()}`,
-    '',
-    `**Currently sick:** ${data.active.toLocaleString()}`,
-    `**Total recovered:** ${data.recovered.toLocaleString()}`,
-    `**Total deaths:** ${data.deaths.toLocaleString()}`,
-    '',
-    `**New cases (today):** ${data.todayCases.toLocaleString()}`,
-    `**New deaths (today):** ${data.todayDeaths.toLocaleString()}`,
-    includeTests ? `**Total tests:** ${data.totalTests.toLocaleString()}` : '',
-    `**[Click for more info](${source})**`,
-  ].join('\n');
+const formatData = (data, source) =>
+  stripIndent`
+    **Total Cases:** ${data.cases.toLocaleString()}
+      
+    **Active Cases:** ${data.active.toLocaleString()}
+    - Today: ${data.todayCases.toLocaleString()}
+    - Critical: ${data.critical.toLocaleString()}
+    **Deaths:** ${data.deaths.toLocaleString()}
+    - Today: ${data.todayDeaths.toLocaleString()}
+    **Recovered:** ${data.recovered.toLocaleString()}
+    - Today: ${data.todayRecovered.toLocaleString()}
+
+    **Tests:** ${data.tests.toLocaleString()}
+
+    **[Click for more info](${source})**
+  `;
 
 (async () => {
   const [globalInfo, localInfoIL] = await Promise.all([
-    fetch(`${BASE_API_URL}/countries/world`).then((res) => res.json()),
-    fetch(`${BASE_API_URL}/countries/israel`).then((res) => res.json()),
+    fetch(url('all')).then((res) => res.json()),
+    fetch(url('countries/israel')).then((res) => res.json()),
   ]);
 
   console.log('Global', globalInfo);
   console.log('Local (IL)', localInfoIL);
 
-  const now = new Date();
+  const updatedAt = new Date(globalInfo.updated);
   const embed = {
-    title: `Update - ${formatDate(now)}`,
+    title: `Update - ${formatDate(updatedAt)}`,
     type: 'rich',
-    timestamp: now.toISOString(),
+    timestamp: updatedAt.toISOString(),
     color: 0x00141b,
-    footer: { text: `UNIX: ${now.getTime()}` },
+    footer: { text: `UNIX: ${updatedAt.getTime()}` },
     fields: [
       {
         name: 'Israel',
-        value: formatData(localInfoIL, `${BASE_SOURCE_URL}/country/israel`),
+        value: formatData(localInfoIL, sourceUrl('country/israel')),
         inline: true,
       },
       {
         name: 'Global',
-        value: formatData(globalInfo, BASE_SOURCE_URL, false),
+        value: formatData(globalInfo, sourceUrl()),
         inline: true,
       },
     ],

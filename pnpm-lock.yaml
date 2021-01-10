@@ -1,0 +1,35 @@
+dependencies:
+  common-tags: 1.8.0
+  node-fetch: 2.6.1
+devDependencies:
+  '@papaia/prettier': 2.0.1
+  dotenv: 8.2.0
+lockfileVersion: 5.2
+packages:
+  /@papaia/prettier/2.0.1:
+    dev: true
+    resolution:
+      integrity: sha512-Tu9GKX2yM7wcyhUBB2MahQT6f6FTHB3kK7LrHljWMsc4ByA63xeZCtiMkPzzY+wWjLGVZLjVeNAUf54BVYDGPA==
+  /common-tags/1.8.0:
+    dev: false
+    engines:
+      node: '>=4.0.0'
+    resolution:
+      integrity: sha512-6P6g0uetGpW/sdyUy/iQQCbFF0kWVMSIVSyYz7Zgjcgh8mgw8PQzDNZeyZ5DQ2gM7LBoZPHmnjz8rUthkBG5tw==
+  /dotenv/8.2.0:
+    dev: true
+    engines:
+      node: '>=8'
+    resolution:
+      integrity: sha512-8sJ78ElpbDJBHNeBzUbUVLsqKdccaa/BXF1uPTw3GrvQTBgrQrtObr2mUrE38vzYd8cEv+m/JBfDLioYcfXoaw==
+  /node-fetch/2.6.1:
+    dev: false
+    engines:
+      node: 4.x || >=6.0.0
+    resolution:
+      integrity: sha512-V4aYg89jEoVRxRb2fJdAg8FHvI7cEyYdVAh94HH0UIK8oJxUfkjlDQN9RbMx+bEjP7+ggMiFRprSti032Oipxw==
+specifiers:
+  '@papaia/prettier': ^2.0.1
+  common-tags: ^1.8.0
+  dotenv: ^8.2.0
+  node-fetch: ^2.6.1

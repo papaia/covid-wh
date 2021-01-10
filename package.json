@@ -4,8 +4,8 @@
   },
   "prettier": "@papaia/prettier",
   "dependencies": {
-    "common-tags": "^1.8.0",
-    "node-fetch": "^2.6.1"
+    "node-fetch": "^2.6.1",
+    "outdent": "^0.8.0"
   },
   "devDependencies": {
     "@papaia/prettier": "^2.0.1",

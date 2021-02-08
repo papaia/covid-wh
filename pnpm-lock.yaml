@@ -2,14 +2,14 @@ dependencies:
   node-fetch: 2.6.1
   outdent: 0.8.0
 devDependencies:
-  '@papaia/prettier': 2.0.1
+  '@papaia/prettier': 2.2.0
   dotenv: 8.2.0
 lockfileVersion: 5.2
 packages:
-  /@papaia/prettier/2.0.1:
+  /@papaia/prettier/2.2.0:
     dev: true
     resolution:
-      integrity: sha512-Tu9GKX2yM7wcyhUBB2MahQT6f6FTHB3kK7LrHljWMsc4ByA63xeZCtiMkPzzY+wWjLGVZLjVeNAUf54BVYDGPA==
+      integrity: sha512-a15a1rGQba/ERu1vrhWvwkP/lx5hH9MBUihd1IJH5m/PRI0gTiLsuozHPyX5SAZ3OWqPk13oLkvA/y5bD6CiNQ==
   /dotenv/8.2.0:
     dev: true
     engines:
@@ -27,7 +27,7 @@ packages:
     resolution:
       integrity: sha512-KiOAIsdpUTcAXuykya5fnVVT+/5uS0Q1mrkRHcF89tpieSmY33O/tmc54CqwA+bfhbtEfZUNLHaPUiB9X3jt1A==
 specifiers:
-  '@papaia/prettier': ^2.0.1
+  '@papaia/prettier': ^2.2.0
   dotenv: ^8.2.0
   node-fetch: ^2.6.1
   outdent: ^0.8.0

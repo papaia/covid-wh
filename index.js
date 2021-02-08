@@ -9,7 +9,8 @@ const url = (path) =>
 const sourceUrl = (path = '') => `https://www.worldometers.info/coronavirus/${path}`;
 
 const pad = (n) => String(n).padStart(2, '0');
-const formatDate = (d) => `${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${d.getFullYear()}`;
+const formatDate = (d) =>
+  `${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${d.getFullYear()}`;
 
 const formatData = (data, source) => outdent`
   **Total Cases:** ${data.cases.toLocaleString()}

@@ -1,4 +1,4 @@
-if (!process.env.WH_ID) require('dotenv').config();
+if (!process.env.WH_ID) require('dotenv/config');
 const fetch = require('node-fetch');
 const outdent = require('outdent');
 

@@ -1,6 +1,6 @@
-if (!process.env.WH_ID) require('dotenv/config');
-const fetch = require('node-fetch');
-const outdent = require('outdent');
+import 'dotenv/config';
+import fetch from 'node-fetch';
+import outdent from 'outdent';
 
 const WH_URL = `https://discordapp.com/api/v8/webhooks/${process.env.WH_ID}/${process.env.WH_TOKEN}?wait=true`;
 

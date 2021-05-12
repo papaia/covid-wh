@@ -2,17 +2,17 @@ lockfileVersion: 5.3
 
 specifiers:
   '@papaia/prettier': ^2.2.0
-  dotenv: ^9.0.0
+  dotenv: ^9.0.2
   node-fetch: ^2.6.1
   outdent: ^0.8.0
 
 dependencies:
+  dotenv: 9.0.2
   node-fetch: 2.6.1
   outdent: 0.8.0
 
 devDependencies:
   '@papaia/prettier': 2.2.0
-  dotenv: 9.0.0
 
 packages:
 
@@ -20,10 +20,10 @@ packages:
     resolution: {integrity: sha512-a15a1rGQba/ERu1vrhWvwkP/lx5hH9MBUihd1IJH5m/PRI0gTiLsuozHPyX5SAZ3OWqPk13oLkvA/y5bD6CiNQ==}
     dev: true
 
-  /dotenv/9.0.0:
-    resolution: {integrity: sha512-yy3x9XjojW8ROTBePD25AcMoHqGHsvHmtfw8QWlpEXyMMXXPj6brUA464AptUvHuTPRmNz6Sd3ZLNLeJl6dHJA==}
+  /dotenv/9.0.2:
+    resolution: {integrity: sha512-I9OvvrHp4pIARv4+x9iuewrWycX6CcZtoAu1XrzPxc5UygMJXJZYmBsynku8IkrJwgypE5DGNjDPmPRhDCptUg==}
     engines: {node: '>=10'}
-    dev: true
+    dev: false
 
   /node-fetch/2.6.1:
     resolution: {integrity: sha512-V4aYg89jEoVRxRb2fJdAg8FHvI7cEyYdVAh94HH0UIK8oJxUfkjlDQN9RbMx+bEjP7+ggMiFRprSti032Oipxw==}

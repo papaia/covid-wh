@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import fetch from 'node-fetch';
-import outdent from 'outdent';
+import untab from 'untab';
 
 const WH_URL = `https://discordapp.com/api/v8/webhooks/${process.env.WH_ID}/${process.env.WH_TOKEN}?wait=true`;
 
@@ -12,7 +12,7 @@ const pad = (n) => String(n).padStart(2, '0');
 const formatDate = (d) =>
   `${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${d.getFullYear()}`;
 
-const formatData = (data, source) => outdent`
+const formatData = (data, source) => untab`
   **Total Cases:** ${data.cases.toLocaleString()}
   **Total Tests:** ${data.tests.toLocaleString()}
 

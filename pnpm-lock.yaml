@@ -4,12 +4,12 @@ specifiers:
   '@papaia/prettier': ^2.2.0
   dotenv: ^9.0.2
   node-fetch: ^2.6.1
-  outdent: ^0.8.0
+  untab: ^1.0.1
 
 dependencies:
   dotenv: 9.0.2
   node-fetch: 2.6.1
-  outdent: 0.8.0
+  untab: 1.0.1
 
 devDependencies:
   '@papaia/prettier': 2.2.0
@@ -30,6 +30,6 @@ packages:
     engines: {node: 4.x || >=6.0.0}
     dev: false
 
-  /outdent/0.8.0:
-    resolution: {integrity: sha512-KiOAIsdpUTcAXuykya5fnVVT+/5uS0Q1mrkRHcF89tpieSmY33O/tmc54CqwA+bfhbtEfZUNLHaPUiB9X3jt1A==}
+  /untab/1.0.1:
+    resolution: {integrity: sha1-X4GAl+Qm8BFkL+kCNovyVg0sCYc=}
     dev: false

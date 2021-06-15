@@ -7,7 +7,7 @@
   "dependencies": {
     "dotenv": "^9.0.2",
     "node-fetch": "^2.6.1",
-    "outdent": "^0.8.0"
+    "untab": "^1.0.1"
   },
   "devDependencies": {
     "@papaia/prettier": "^2.2.0"

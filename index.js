@@ -16,22 +16,23 @@ const pad = (n) => String(n).padStart(2, '0');
 const formatDate = (d) =>
   `${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${d.getFullYear()}`;
 
-const formatData = (data, vaccineTimeline, source) => untab`
-  **Total Cases:** ${data.cases.toLocaleString()}
-  **Total Tests:** ${data.tests.toLocaleString()}
+const formatData = (data, vaccineTimeline, source) =>
+  untab`
+  **Total Cases:** ${data.cases}
+  **Total Tests:** ${data.tests}
 
-  **Active Cases:** ${data.active.toLocaleString()}
-  - Today: ${data.todayCases.toLocaleString()}
-  - Critical: ${data.critical.toLocaleString()}
-  **Deaths:** ${data.deaths.toLocaleString()}
-  - Today: ${data.todayDeaths.toLocaleString()}
-  **Recovered:** ${data.recovered.toLocaleString()}
-  - Today: ${data.todayRecovered.toLocaleString()}
-  **Vaccinated:** ${vaccineTimeline[1].total.toLocaleString()}
-  - Today: ${(vaccineTimeline[1].daily || vaccineTimeline[0].daily).toLocaleString()}
+  **Active Cases:** ${data.active}
+  - Today: ${data.todayCases}
+  - Critical: ${data.critical}
+  **Deaths:** ${data.deaths}
+  - Today: ${data.todayDeaths}
+  **Recovered:** ${data.recovered}
+  - Today: ${data.todayRecovered}
+  **Vaccinated:** ${vaccineTimeline[1].total}
+  - Today: ${vaccineTimeline[1].daily || vaccineTimeline[0].daily}
 
   **[Click for more info](${source})**
-`;
+`.replace(/\d+/g, (n) => parseInt(n).toLocaleString());
 
 (async () => {
   const [globalGeneral, globalVaccine, israelGeneral, israelVaccine] = await Promise.all(
@@ -57,7 +58,7 @@ const formatData = (data, vaccineTimeline, source) => untab`
     footer: { text: `UNIX: ${updatedAt.getTime()}` },
     fields: [
       {
-        name: 'Israel',
+        name: '🇮🇱 Israel',
         value: formatData(
           israelGeneral,
           israelVaccine.timeline,
@@ -66,7 +67,7 @@ const formatData = (data, vaccineTimeline, source) => untab`
         inline: true,
       },
       {
-        name: 'Global',
+        name: '🗺️ Global',
         value: formatData(globalGeneral, globalVaccine, sourceUrl()),
         inline: true,
       },

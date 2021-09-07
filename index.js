@@ -4,15 +4,19 @@ import untab from 'untab';
 
 const WH_URL = `https://discordapp.com/api/v8/webhooks/${process.env.WH_ID}/${process.env.WH_TOKEN}?wait=true`;
 
-const url = (path) =>
-  `https://disease.sh/v3/covid-19/${path}?yesterday=false&twoDaysAgo=false&strict=true&allowNull=false`;
+const BASE_API_URL = 'https://disease.sh/v3/covid-19';
+const basicURL = (path) =>
+  `${BASE_API_URL}/${path}?yesterday=false&twoDaysAgo=false&strict=true&allowNull=false`;
+const vaccineURL = (path) =>
+  `${BASE_API_URL}/vaccine/coverage/${path}?lastdays=2&fullData=true`;
+
 const sourceUrl = (path = '') => `https://www.worldometers.info/coronavirus/${path}`;
 
 const pad = (n) => String(n).padStart(2, '0');
 const formatDate = (d) =>
   `${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${d.getFullYear()}`;
 
-const formatData = (data, source) => untab`
+const formatData = (data, vaccineTimeline, source) => untab`
   **Total Cases:** ${data.cases.toLocaleString()}
   **Total Tests:** ${data.tests.toLocaleString()}
 
@@ -23,20 +27,28 @@ const formatData = (data, source) => untab`
   - Today: ${data.todayDeaths.toLocaleString()}
   **Recovered:** ${data.recovered.toLocaleString()}
   - Today: ${data.todayRecovered.toLocaleString()}
+  **Vaccinated:** ${vaccineTimeline[1].total.toLocaleString()}
+  - Today: ${(vaccineTimeline[1].daily || vaccineTimeline[0].daily).toLocaleString()}
 
   **[Click for more info](${source})**
 `;
 
 (async () => {
-  const [globalInfo, localInfoIL] = await Promise.all([
-    fetch(url('all')).then((res) => res.json()),
-    fetch(url('countries/israel')).then((res) => res.json()),
-  ]);
+  const [globalGeneral, globalVaccine, israelGeneral, israelVaccine] = await Promise.all(
+    [
+      basicURL('all'),
+      vaccineURL(''),
+      basicURL('countries/israel'),
+      vaccineURL('countries/israel'),
+    ].map((e) => fetch(e).then((res) => res.json())),
+  );
 
-  console.log('Global', globalInfo);
-  console.log('Local (IL)', localInfoIL);
+  console.log('Global General', globalGeneral);
+  console.log('Global Vaccine', globalVaccine);
+  console.log('Israel General', israelGeneral);
+  console.log('Israel Vaccine', israelVaccine);
 
-  const updatedAt = new Date(globalInfo.updated);
+  const updatedAt = new Date(globalGeneral.updated);
   const embed = {
     title: `Update - ${formatDate(updatedAt)}`,
     type: 'rich',
@@ -46,12 +58,16 @@ const formatData = (data, source) => untab`
     fields: [
       {
         name: 'Israel',
-        value: formatData(localInfoIL, sourceUrl('country/israel')),
+        value: formatData(
+          israelGeneral,
+          israelVaccine.timeline,
+          sourceUrl('country/israel'),
+        ),
         inline: true,
       },
       {
         name: 'Global',
-        value: formatData(globalInfo, sourceUrl()),
+        value: formatData(globalGeneral, globalVaccine, sourceUrl()),
         inline: true,
       },
     ],

@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import fetch from 'node-fetch';
-import untab from 'untab';
+import stripIndent from 'strip-indent';
 
 const WH_URL = `https://discordapp.com/api/v8/webhooks/${process.env.WH_ID}/${process.env.WH_TOKEN}?wait=true`;
 
@@ -17,7 +17,7 @@ const formatDate = (d) =>
   `${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${d.getFullYear()}`;
 
 const formatData = (data, vaccineTimeline, source) =>
-  untab`
+  stripIndent(`
   **Total Cases:** ${data.cases}
   **Total Tests:** ${data.tests}
 
@@ -32,7 +32,7 @@ const formatData = (data, vaccineTimeline, source) =>
   - Today: ${vaccineTimeline[1].daily || vaccineTimeline[0].daily}
 
   **[Click for more info](${source})**
-`.replace(/\d+/g, (n) => parseInt(n).toLocaleString());
+`).replace(/\d+/g, (n) => parseInt(n).toLocaleString());
 
 (async () => {
   const [globalGeneral, globalVaccine, israelGeneral, israelVaccine] = await Promise.all(

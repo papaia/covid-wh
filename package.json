@@ -5,8 +5,8 @@
   },
   "prettier": "@papaia/prettier",
   "dependencies": {
-    "dotenv": "^9.0.2",
-    "node-fetch": "^2.6.1",
+    "dotenv": "^10.0.0",
+    "node-fetch": "^3.0.0",
     "untab": "^1.0.1"
   },
   "devDependencies": {

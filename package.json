@@ -6,7 +6,7 @@
   },
   "prettier": "@papaia/prettier",
   "dependencies": {
-    "node-fetch": "^3.0.0",
+    "node-fetch": "^3.1.0",
     "strip-indent": "^4.0.0"
   },
   "devDependencies": {

@@ -1,4 +1,3 @@
-import 'dotenv/config';
 import fetch from 'node-fetch';
 import stripIndent from 'strip-indent';
 

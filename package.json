@@ -1,15 +1,16 @@
 {
   "type": "module",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "start:dev": "node -r dotenv/config index.js"
   },
   "prettier": "@papaia/prettier",
   "dependencies": {
-    "dotenv": "^10.0.0",
     "node-fetch": "^3.0.0",
     "strip-indent": "^4.0.0"
   },
   "devDependencies": {
-    "@papaia/prettier": "^2.2.0"
+    "@papaia/prettier": "^2.2.0",
+    "dotenv": "^10.0.0"
   }
 }

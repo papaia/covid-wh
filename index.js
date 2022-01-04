@@ -1,7 +1,7 @@
 import fetch from 'node-fetch';
 import stripIndent from 'strip-indent';
 
-const WH_URL = `https://discordapp.com/api/v8/webhooks/${process.env.WH_ID}/${process.env.WH_TOKEN}?wait=true`;
+const WH_URL = `https://discord.com/api/v8/webhooks/${process.env.WH_ID}/${process.env.WH_TOKEN}?wait=true`;
 
 const BASE_API_URL = 'https://disease.sh/v3/covid-19';
 const basicURL = (path) =>

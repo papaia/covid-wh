@@ -33,7 +33,7 @@ const formatData = (data, vaccineTimeline, source) =>
   **[Click for more info](${source})**
 `).replace(/\d+/g, (n) => parseInt(n).toLocaleString());
 
-(async () => {
+async function main() {
   const [globalGeneral, globalVaccine, israelGeneral, israelVaccine] = await Promise.all(
     [
       basicURL('all'),
@@ -86,4 +86,6 @@ const formatData = (data, vaccineTimeline, source) =>
   console.log('Sent!');
 
   process.exit(0);
-})();
+}
+
+main();
